@@ -1,0 +1,595 @@
+<style>
+    html, body {
+    height: 100%;  
+    margin: 0;     
+    padding: 0;    
+    }
+
+    body > * {
+        margin-bottom: 0; 
+    }
+    .home {
+        background-color: #ffffff;
+        text-align: center;
+        font-size: 80;
+        color: #000000;
+        scroll-margin-top: 60px;
+    }
+    .subhome {
+        background-color: #ffffff;
+        text-align: center;
+        font-size: 30;
+        color: #000000;
+        scroll-margin-top: 60px;
+    }
+
+    .title {
+    	background-color: #4c4b4b;
+        text-align: center;
+        font-size: 30;
+        color: #ffffff;
+        scroll-margin-top: 60px;
+    }
+    .intro {
+
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        /* padding: 20px 300px 20px 300px; */
+        padding: 3% 10% 3% 10%;
+   }
+    .main {
+        font-size: 20;
+    }
+    .other {
+    	background-color: #8a8a8a;
+        text-align: center;
+        font-size: 20;
+        color: #ffffff;
+    }
+    .container {
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        padding: 10px 200px;
+        margin: 0 auto;
+        max-width: 100%;
+        box-sizing: border-box; 
+   }
+   .grid-container {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr); /* 2 columns */
+        grid-template-rows: repeat(2, 1fr); /* 2 rows */
+        gap: 10px; /* Space between videos */
+        width: 100%;
+    }
+   .image {
+        flex: 1 1 auto;
+        display: flex;
+        justify-content: center;
+        width: 100%;
+        max-width: 100%;
+        height: auto;
+        object-fit: cover;
+        text-align: center;
+        
+    }
+    .image img {
+        max-width: 100%;
+        height: auto;
+        object-fit: cover;
+        box-sizing: border-box;
+    }
+    .image-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin: 10px;
+    }
+
+    .image-container img {
+        border: 2px solid black;
+    }
+    .box {
+        /* position: relative; */
+        width: 320px;
+        background: #fff;
+        font-size: 15;
+        padding: 20px 40px 60px;
+        box-shadow: 0 15px 45px rgba(0,0,0,.1);
+    }
+    .navbar {
+        background-color: #4c4b4b;
+        overflow: hidden;
+        position: fixed;
+        top: 0;
+        width: 100%;
+        z-index: 1000;
+        }
+    .navbar a {
+        float: left;
+        display: block;
+        color: white;
+        text-align: center;
+        padding: 14px 20px;
+        text-decoration: none;
+    }
+    .navbar a:hover {
+        background-color: #ddd;
+        color: black;
+    }
+    .content {
+        margin-top: 60px;
+    }
+    .video {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 85%;
+    height: 85%;
+    }
+    #authors {
+        background-color: #ffffff; 
+        color: #000000;
+        text-align: center;
+        padding: 20px;
+        margin-top: 20px;
+        font-size: 18;
+    }
+    #authors ul {
+        list-style-type: none; /* Removes the bullet points */
+        padding: 0;
+    }
+    #authors li {
+        margin: 10px 0;
+    }
+    #authors a {
+    color: #000000; /* Sets the text color of the links to black */
+    text-decoration: none; /* Optional: removes underline from links */
+    }
+
+    #authors a:hover {
+        color: #ab1313;
+    }
+    pre {
+    background-color: #f4f4f4;
+    border: 1px solid #ddd;
+    padding: 1px;
+    box-shadow: 1px 1px 1px rgba(0,0,0,0.1);
+    font-size: 15;
+    }
+    code {
+        color: #c7254e;
+        background-color: #f9f2f4;
+    }
+    .code-container {
+    background-color: #282c34; 
+    color: #abb2bf;           
+    border-radius: 10px;      
+    padding: 20px;           
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 16px;
+    overflow-x: auto;         
+    }
+    .code-title {
+    color: #ffffff; 
+    margin-top: 0; 
+    margin-bottom: 10px; 
+    padding-left: 10px; 
+    text-align: center;
+    }
+    .key {
+        color: #e5c07b;           
+    }
+
+    .value {
+        color: #98c379;           
+    }
+
+    .comment {
+        color: #5c6370;          
+        font-style: italic;       
+    }
+
+    code {
+        display: block;          
+        white-space: pre-wrap;   
+        line-height: 1.5;        
+    }
+    footer {
+    background-color: #2c3e50; 
+    color: #ffffff; 
+    text-align: center; 
+    padding: 20px 10px; 
+    font-size: 16px; 
+    font-family: Arial, sans-serif; 
+    border-top: 3px solid #34495e; 
+    box-shadow: 0 -2px 5px rgba(0,0,0,0.3);
+    position: relative; 
+    bottom: 0; 
+    width: 100%;
+    }
+    .arrow {
+    cursor: pointer;
+    user-select: none;
+    padding-right: 5px;
+    transition: transform 0.3s ease;
+    display: inline-block; 
+    }
+
+    .arrow.open {
+        transform: rotate(90deg);
+    }
+
+
+
+</style>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Neural Force Field</title>
+    <link rel="icon" type="image/png" href="./images/logo.png">
+</head>
+
+<body>
+        
+    <div class="navbar">
+        <!-- <a href="#"><img src="images/logo.png" width="30" height="30"></a> -->
+        <a href="#Abstract">Abstract</a>
+        <a href="#Demo">Demo</a>
+        <a href="#Learning">Learning</a>
+        <a href="#Prediction">Prediction</a>
+        <a href="#Planning">Planning</a>
+        <a href="https://arxiv.org/abs/2502.08987">Paper</a>
+        <a href="https://github.com/lishiqianhugh/NeuralForceField">Code</a>
+    </div>
+
+    <div class="content"></div>
+
+    <div class="home"  id="NeuralForceField">
+        <div><a> Neural Force Field</a></div>
+    </div>
+    <div class="subhome"  id="NeuralForceField">
+        <div><a> Learning Generalized Physical Representation from a Few Examples</a></div>
+    </div>
+
+    <section id="authors">
+        <ul>
+            <li><a href="https://lishiqianhugh.github.io">Shiqian Li<sup>* 1 2</sup></a>,
+                <a href="https://ruihong04.github.io/">Ruihong Shen<sup>* 1</sup></a>,
+                <a href="http://wellyzhang.github.io/">Chi Zhang<sup>2 <span>&#9993;</span></sup></a>,
+                <a href="https://yzhu.io/">Yixin Zhu<sup>1 <span>&#9993;</span></sup></a></li>
+        </ul>
+        <ul>
+            <li>* Equal Contributors &nbsp &nbsp 1 Institute for Artificial Intelligence, Peking University</li>
+            <li>2 National Key Laboratory of General Artificial Intelligence, BIGAI </li>
+        </ul>
+    </section>
+
+    <div class="title" id="">
+        <br>
+    </div>
+    <div class="container">
+    <div class="image">
+        <img src="images/overview.jpg" title="overview">
+    </div>
+    </div>
+
+    <div class="title" id="Abstract">
+        Abstract
+    </div>
+
+
+    <div class="intro">
+        <div class="main">
+            Physical reasoning is a remarkable human ability that enables rapid learning and generalization from limited experience. Current AI models, despite extensive training, still struggle to achieve similar generalization, especially in Out-of-distribution (OOD) settings. This limitation stems from their inability to abstract core physical principles from observations. A key challenge is developing representations that can efficiently learn and generalize physical dynamics from minimal data. Here we present Neural Force Field (NFF), a modeling framework built on Neural Ordinary Differential Equation (NODE) that learns interpretable force field representations which can be efficiently integrated through an Ordinary Differential Equation ( ODE) solver to predict object trajectories. Unlike existing approaches that rely on high-dimensional latent spaces, NFF captures fundamental physical concepts such as gravity, support, and collision in an interpretable manner. Experiments on two challenging physical reasoning tasks demonstrate that NFF, trained with only a few examples, achieves strong generalization to unseen scenarios. This physics-grounded representation enables efficient forward-backward planning and rapid adaptation through interactive refinement. Our work suggests that incorporating physics-inspired representations into learning systems can help bridge the gap between artificial and human physical reasoning capabilities.
+        </div>
+    </div>
+
+    <div class="title" id="Demo">
+        Demo
+    </div>
+
+    <div class="image">
+        <iframe src="https://player.vimeo.com/video/1055247476" style="width: 80vw; height: 45vw; max-width: 75%; aspect-ratio: 16 / 9;" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
+    </div>
+
+    <div class="title" id="Learning">
+        Learning force field from a few examples
+    </div>
+
+    <div class="intro">
+        <div class="main">
+            We present the learned force fields in both the intuitive physical reasoning task and the n-body task, demonstrating various fundamental physical concepts and principles.
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="image">
+            <div class="grid-container">
+                <div class="image-container">
+                    <p>Falling</p>
+                    <video controls autoplay muted loop style="width: 75%; height: auto;">
+                        <source src="images/concepts/falling.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+                <div class="image-container">
+                    <p>Sliding</p>
+                    <video controls autoplay muted loop style="width: 75%; height: auto;">
+                        <source src="images/concepts/sliding.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+                <div class="image-container">
+                    <p>Collision</p>
+                    <video controls autoplay muted loop style="width: 75%; height: auto;">
+                        <source src="images/concepts/collision.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+                <div class="image-container">
+                    <p>Spring</p>
+                    <video controls autoplay muted loop style="width: 75%; height: auto;">
+                        <source src="images/concepts/spring.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+            </div>
+            <div class="image-container">
+                <p>Learned gravitational field</p>
+                <video controls autoplay muted loop style="width: 100%; height: auto;">
+                    <source src="images/nbody/force_field.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+            </div>
+        </div>
+    </div>
+
+    <div class="content"></div>
+
+    <div class="title" id="Prediction">
+        Prediction on unseen scenarios
+    </div>
+    <div class="intro">
+        <div class="main">
+            <strong>I-PHYRE training data:</strong> 10 basic scenarios (support, hinder, direction, hole, fill, seesaw, angle, impulse, pendulum, and spring), each with 10 random action sequences.
+        </div>
+    </div>
+    <div class="intro">
+        <div class="main">
+            <strong>I-PHYRE within-scenario:</strong> scenarios identical to the training data but with different action sequences.
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="image">
+            <div class="image-container">
+                <p>Direction</p>
+                <video controls autoplay muted loop style="width: 100%; height: auto;">
+                    <source src="images/iphyre/direction.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+            </div>
+            <div class="image-container">
+                <p>Fill</p>
+                <video controls autoplay muted loop style="width: 100%; height: auto;">
+                    <source src="images/iphyre/fill.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+            </div>
+            <div class="image-container">
+                <p>Seesaw</p>
+                <video controls autoplay muted loop style="width: 100%; height: auto;">
+                    <source src="images/iphyre/seesaw.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+            </div>
+            <div class="image-container">
+                <p>Impulse</p>
+                <video controls autoplay muted loop style="width: 100%; height: auto;">
+                    <source src="images/iphyre/impulse_0.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+            </div>
+        </div>
+    </div>
+
+    <div class="intro">
+        <div class="main">
+            <strong>I-PHYRE cross-scenario:</strong> scenarios that differ from the training data, including noisy, compositional, and multi-ball environments.
+        </div>
+    </div>
+    <div class="container">
+        <div class="image">
+            <div class="image-container">
+                <p>Noisy angle</p>
+                <video controls autoplay muted loop style="width: 100%; height: auto;">
+                    <source src="images/iphyre/noisy_angle.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+            </div>
+            <div class="image-container">
+                <p>More-step hole</p>
+                <video controls autoplay muted loop style="width: 100%; height: auto;">
+                    <source src="images/iphyre/more_step_hole_1.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+            </div>
+            <div class="image-container">
+                <p>Multi-ball spring</p>
+                <video controls autoplay muted loop style="width: 100%; height: auto;">
+                    <source src="images/iphyre/multi_ball_spring_0.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+            </div>
+            <div class="image-container">
+                <p>Multi-ball redirect</p>
+                <video controls autoplay muted loop style="width: 100%; height: auto;">
+                    <source src="images/iphyre/multi_ball_redirect_0.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+            </div>
+        </div>
+    </div>
+
+    <div class="intro">
+        <div class="main">
+            <strong>N-body training data:</strong> 200 trajectories involving 2-body and 3-body systems (such as planets or comets).
+        </div>
+    </div>
+
+    <div class="intro">
+        <div class="main">
+            <strong>N-body within-scenario:</strong> 2-body and 3-body scenarios with different initial conditions (in-distribution positions and masses).
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="image">
+            <div class="image-container">
+                <p>2-body</p>
+                <video controls autoplay muted loop style="width: 100%; height: auto;">
+                    <source src="images/nbody/2body.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+            </div>
+            <div class="image-container">
+                <p>3-body</p>
+                <video controls autoplay muted loop style="width: 100%; height: auto;">
+                    <source src="images/nbody/3body.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+            </div>
+        </div>
+    </div>
+
+    <div class="intro">
+        <div class="main">
+            <strong>N-body cross-scenario:</strong> 9-body scenarios with larger orbital radii and extended time steps.
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="image">
+            <div class="image-container">
+                <p>9-body</p>
+                <video controls autoplay muted loop style="width: 100%; height: auto;">
+                    <source src="images/nbody/9body.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+            </div>
+        </div>
+    </div>
+    
+    <div class="title" id="Planning">
+        Planning on unseen scenarios
+    </div>
+
+    <div class="intro">
+        <div class="main">
+            <strong>Forward planning:</strong> given randomly sampled action sequences, simulate the outcome trajectories using the trained NFF and select the best that can achieve the goal (make the ball into the abyss by eliminating the white blocks).
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="image">
+            <div class="image-container">
+                <p>Simulated sequence 0</p>
+                <video controls autoplay muted loop style="width: 100%; height: auto;">
+                    <source src="images/forward/more_step_hole_0.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+            </div>
+            <div class="image-container">
+                <p>Simulated sequence 1</p>
+                <video controls autoplay muted loop style="width: 100%; height: auto;">
+                    <source src="images/forward/more_step_hole_1.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+            </div>
+            <div class="image-container">
+                <p>Simulated sequence 2</p>
+                <video controls autoplay muted loop style="width: 100%; height: auto;">
+                    <source src="images/forward/more_step_hole_2.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+            </div>
+            <div class="image-container">
+                <p>Selected solution</p>
+                <video controls autoplay muted loop style="width: 100%; height: auto;">
+                    <source src="images/forward/more_step_hole_2.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+            </div>
+        </div>
+    </div>
+
+    <div class="intro">
+        <div class="main">
+            <strong>Refinement:</strong> update the model after each round of trials.
+
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="image">
+            <div class="image-container">
+                <p>Round 0</p>
+                <video controls autoplay muted loop style="width: 100%; height: auto;">
+                    <source src="images/refine/multi_ball_lever_0.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+            </div>
+            <div class="image-container">
+                <p>Round 1</p>
+                <video controls autoplay muted loop style="width: 100%; height: auto;">
+                    <source src="images/refine/multi_ball_lever_0_refine0.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+            </div>
+            <div class="image-container">
+                <p>Round 2</p>
+                <video controls autoplay muted loop style="width: 100%; height: auto;">
+                    <source src="images/refine/multi_ball_lever_0_refine3.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+            </div>
+        </div>
+    </div>
+
+    <div class="intro">
+        <div class="main">
+            <strong>Backward planning:</strong> utilize the invertible information flow of ODE integration to compute the initial state directly from the final state.
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="image">
+            <div class="image-container">
+                <p>Forward simulation</p>
+                <video controls autoplay muted loop style="width: 100%; height: auto;">
+                    <source src="images/backward/forward.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+            </div>
+            <div class="image-container">
+                <p>Backward simulation</p>
+                <video controls autoplay muted loop style="width: 100%; height: auto;">
+                    <source src="images/backward/backward.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+            </div>
+        </div>
+    </div>
+
+    <div class="content"></div>
+    <footer>
+        <p>© 2025 Project by Neural Force Field Team. All Rights Reserved.</p>
+    </footer>
+</body>
+</html>
